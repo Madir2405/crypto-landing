@@ -1,0 +1,627 @@
+body {
+    background-color: #06070f;
+    color: #e2e8f0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection { 
+    background: rgba(139, 92, 246, 0.4); 
+    color: white; 
+}
+
+/* Dots BG */
+.grid-bg { 
+    background-image: radial-gradient(rgba(139, 92, 246, .09) 3px, transparent 2px); 
+    background-size: 40px 40px; 
+}
+
+/* Premium Gradient Text */
+.grad-text {
+    background: linear-gradient(90deg, #22d3ee 0%, #10b981 45%, #8b5cf6 100%);
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent;
+    font-weight: 700;
+}
+
+/* Glassmorphism utilities */
+.glass {
+    background: rgba(16, 18, 53, 0.5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: #1a1d4a; border-radius: 8px; }
+::-webkit-scrollbar-track { background: #06070f; }
+
+/* Card Hover Effects */
+.card-hover { 
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s ease, border-color .35s ease; 
+}
+.card-hover:hover { 
+    transform: translateY(-6px); 
+}
+
+/* Animation Classes for JS Intersection Observer */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: none;
+}
+
+/* Interactive Exchange Widget (User Pipeline Mod 4) */
+.exchange-chart .exchange-candle,
+.exchange-chart .exchange-tp-line,
+.exchange-chart .exchange-tp-flag,
+.exchange-chart .exchange-live-point {
+    opacity: 0;
+}
+
+.exchange-chart .exchange-candle {
+    transform: translateY(5px);
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.exchange-chart .exchange-candle.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exchange-chart .exchange-tp-line {
+    stroke-dasharray: 5 3;
+    stroke-dashoffset: 380;
+    transition: opacity 180ms ease, stroke-dashoffset 900ms ease-out;
+}
+
+.exchange-chart .exchange-tp-line.is-visible {
+    opacity: 1;
+    stroke-dashoffset: 0;
+}
+
+.exchange-chart .exchange-tp-flag,
+.exchange-chart .exchange-live-point {
+    transition: opacity 250ms ease;
+}
+
+.exchange-chart .exchange-tp-flag.is-visible,
+.exchange-chart .exchange-live-point.is-visible {
+    opacity: 1;
+}
+
+.exchange-plot.is-tp-hit {
+    animation: exchange-tp-hit 1.25s ease-out both;
+}
+
+@keyframes exchange-tp-hit {
+    0%, 100% {
+        border-color: rgba(255, 255, 255, 0.06);
+        background-color: #080c15;
+        box-shadow: inset 0 0 0 0 rgba(52, 211, 153, 0), 0 0 0 rgba(16, 185, 129, 0);
+    }
+    28%, 62% {
+        border-color: rgba(52, 211, 153, 0.8);
+        background-color: rgba(6, 35, 30, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.45), 0 0 22px rgba(16, 185, 129, 0.3);
+    }
+}
+
+.exchange-order-input {
+    caret-color: #67e8f9;
+}
+
+.exchange-open-long {
+    transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.exchange-open-long.is-pressed {
+    transform: translateY(1px) scale(0.97);
+    background-color: rgba(16, 185, 129, 0.28);
+    box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.55), 0 0 14px rgba(16, 185, 129, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exchange-chart .exchange-candle,
+    .exchange-chart .exchange-tp-line,
+    .exchange-chart .exchange-tp-flag,
+    .exchange-chart .exchange-live-point,
+    .exchange-plot.is-tp-hit,
+    .exchange-open-long {
+        transition-duration: 1ms;
+    }
+}
+
+/* AI Terminal Styles */
+.terminal-bg {
+    background: rgba(16, 18, 53, 0.5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.grad-border { position: relative; }
+.grad-border::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+    background: linear-gradient(135deg, rgba(34, 211, 238, .55), rgba(139, 92, 246, .35), rgba(16, 185, 129, .45));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; 
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude; 
+    pointer-events: none;
+}
+
+.glow-violet { box-shadow: 0 0 70px -16px rgba(139, 92, 246, .45); }
+
+@keyframes blink { 50% { opacity: 0; } }
+.term-caret::after { 
+    content: '▋'; 
+    margin-left: 1px; 
+    color: #22d3ee; 
+    animation: blink 1s steps(1) infinite; 
+}
+
+/* Signals line Animation Styles */
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% + 0.5rem)); }
+}
+.animate-scroll-left {
+    animation: scroll-left 40s linear infinite;
+}
+
+/* Ticker Card Styles */
+.ticker-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+    border: 1px solid transparent;
+}
+.ticker-card:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 20px rgba(243, 24, 96, 0.1);
+}
+.ticker-card-long {
+    border-color: rgba(16, 185, 129, 0.15);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+.ticker-card-short {
+    border-color: rgba(243, 24, 96, 0.15);
+}
+
+/* How It Works Modules */
+@keyframes scan-v {
+    0% { top: -10%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 110%; opacity: 0; }
+}
+
+.animate-scan-v {
+    animation: scan-v 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Premium Module Glass */
+.module-glass {
+    background: linear-gradient(165deg, rgba(30, 32, 70, 0.4) 0%, rgba(10, 12, 30, 0.6) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 1px rgba(0, 0, 0, 0.5), 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+.module-border {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+}
+
+@keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+.animate-ping-slow {
+    animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Micro-terminals typing & scroll (динамічна симуляція JS) */
+@keyframes code-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.cursor-blink::after {
+    content: '▍';
+    color: #22d3ee;
+    animation: code-cursor 0.8s infinite;
+    margin-left: 2px;
+}
+
+.terminal-scroll::-webkit-scrollbar {
+    width: 2px;
+}
+.terminal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+}
+
+/* Levitating booklet float (User Card 2) */
+@keyframes floatLevitate {
+    0%, 100% { 
+        transform: translateY(0); 
+        box-shadow: 0 8px 24px -4px rgba(139, 92, 246, 0.35);
+    }
+    50% { 
+        transform: translateY(-5px); 
+        box-shadow: 0 16px 32px -4px rgba(139, 92, 246, 0.55);
+    }
+}
+.animate-levitate {
+    animation: floatLevitate 3.6s ease-in-out infinite;
+}
+
+/* Floating Badges in Signal Container (User Card 1) */
+@keyframes float-block {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+.animate-float-1 { animation: float-block 3s ease-in-out infinite; }
+.animate-float-2 { animation: float-block 3s ease-in-out 0.5s infinite; }
+.animate-float-3 { animation: float-block 3s ease-in-out 1s infinite; }
+.animate-float-4 { animation: float-block 3s ease-in-out 1.5s infinite; }
+
+/* Interactive Simulated Buttons & Cursor (User Card 3) */
+@keyframes mod3CursorSelect {
+    0%, 100% { left: 90%; top: 110%; transform: scale(1); }
+    12% { left: 22%; top: 50%; transform: scale(1); }
+    15% { left: 22%; top: 50%; transform: scale(0.85); }
+    20% { left: 22%; top: 50%; transform: scale(0.85); }
+    23% { left: 22%; top: 50%; transform: scale(1); }
+    42% { left: 72%; top: 50%; transform: scale(1); }
+    45% { left: 72%; top: 50%; transform: scale(0.85); }
+    50% { left: 72%; top: 50%; transform: scale(0.85); }
+    53% { left: 72%; top: 50%; transform: scale(1); }
+    70% { left: 90%; top: 110%; transform: scale(1); }
+}
+
+.mod3-cursor {
+    animation: mod3CursorSelect 9s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    z-index: 50;
+    pointer-events: none;
+    transform-origin: top left;
+    will-change: transform, left, top;
+}
+
+@keyframes mod3BtnPressRed {
+    0%, 12%, 23%, 100% { 
+        transform: scale(1); 
+        background-color: rgba(244, 63, 94, 0.03); 
+        border-color: rgba(244, 63, 94, 0.15); 
+        box-shadow: none; 
+    }
+    15%, 20% { 
+        transform: scale(0.96); 
+        background-color: rgba(244, 63, 94, 0.15); 
+        border-color: rgba(244, 63, 94, 0.4); 
+        box-shadow: 0 0 20px rgba(244, 63, 94, 0.15); 
+    }
+}
+.mod3-btn-red {
+    animation: mod3BtnPressRed 9s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background-color, border-color;
+}
+
+@keyframes mod3IconRed {
+    0%, 12%, 23%, 100% { border-color: rgba(244, 63, 94, 0.3); color: #fb7185; }
+    15%, 20% { border-color: rgba(244, 63, 94, 0.8); color: #fff; }
+}
+.mod3-icon-red { animation: mod3IconRed 9s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+
+@keyframes mod3BtnPressGreen {
+    0%, 42%, 53%, 100% { 
+        transform: scale(1); 
+        background-color: rgba(16, 185, 129, 0.03); 
+        border-color: rgba(16, 185, 129, 0.15); 
+        box-shadow: none; 
+    }
+    45%, 50% { 
+        transform: scale(0.96); 
+        background-color: rgba(16, 185, 129, 0.15); 
+        border-color: rgba(16, 185, 129, 0.4); 
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15); 
+    }
+}
+.mod3-btn-green {
+    animation: mod3BtnPressGreen 9s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background-color, border-color;
+}
+
+@keyframes mod3IconGreen {
+    0%, 42%, 53%, 100% { border-color: rgba(16, 185, 129, 0.3); color: #34d399; }
+    45%, 50% { border-color: rgba(16, 185, 129, 0.8); color: #fff; }
+}
+.mod3-icon-green { animation: mod3IconGreen 9s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Benefits Section (#cases) */
+.proof-glow {
+    position: absolute;
+    width: 22rem;
+    height: 22rem;
+    border-radius: 9999px;
+    filter: blur(100px);
+    opacity: .12;
+    pointer-events: none;
+}
+.proof-glow-cyan { top: 18rem; left: -12rem; background: #22d3ee; }
+.proof-glow-violet { top: 48rem; right: -12rem; background: #8b5cf6; }
+
+.proof-benefit-card {
+    position: relative;
+    min-height: 238px;
+    padding: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .075);
+    border-radius: 1.5rem;
+    background: linear-gradient(145deg, rgba(22, 25, 58, .82), rgba(10, 12, 30, .72));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .045), 0 18px 44px -32px rgba(0, 0, 0, .85);
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s ease, background .35s ease;
+}
+.proof-benefit-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(34, 211, 238, .25);
+    background: linear-gradient(145deg, rgba(26, 30, 68, .92), rgba(10, 12, 30, .8));
+}
+.proof-benefit-icon {
+    display: grid;
+    width: 2.8rem;
+    height: 2.8rem;
+    place-items: center;
+    border: 1px solid;
+    border-radius: 1rem;
+}
+.proof-benefit-icon svg { width: 1.35rem; height: 1.35rem; }
+.proof-benefit-index {
+    display: block;
+    margin-top: 1.2rem;
+    color: #64748b;
+    font: 600 .62rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .12em;
+}
+.proof-benefit-line {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background-image: linear-gradient(90deg, var(--tw-gradient-stops));
+    opacity: .55;
+    transition: opacity .3s ease;
+}
+.proof-benefit-card:hover .proof-benefit-line { opacity: 1; }
+
+/* Кастомний тонкий скролбар для списку угод */
+.trades-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.trades-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 9999px;
+}
+.trades-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+}
+.trades-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(34, 211, 238, 0.4);
+}
+
+/* Приховування стандартного скролбара слайдера */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.reviews-slider-track {
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        cursor: grab;
+    }
+.reviews-slider-track.is-dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+    cursor: grabbing;
+    user-select: none;
+}
+
+/* Картка відгуку в стилі нейро-термінала QuantX */
+.review-card {
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden; /* Виправляє вихід нижньої лінії за межі rounded-3xl */
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+}
+.review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 48px -20px rgba(34, 211, 238, 0.16),
+                0 0 30px -10px rgba(139, 92, 246, 0.18);
+}
+.review-card:hover .proof-benefit-line {
+    opacity: 1;
+}
+
+/* Міні-віджет верифікованого результату всередині картки */
+.review-trade-box {
+    background: rgba(8, 12, 24, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.review-card:hover .review-trade-box {
+    border-color: rgba(16, 185, 129, 0.28);
+    background: rgba(10, 20, 32, 0.85);
+}
+
+/* Індикатори пагінації (dots) з коректною анімацією прогресу */
+@keyframes dotProgress {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+}
+.reviews-dot {
+    position: relative;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.16);
+    overflow: hidden;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+.reviews-dot:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+.reviews-dot.is-active {
+    width: 2.25rem;
+    background: rgba(255, 255, 255, 0.12);
+}
+.reviews-dot-fill {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, #22d3ee 0%, #10b981 50%, #8b5cf6 100%);
+    border-radius: inherit;
+}
+.reviews-dot.is-active .reviews-dot-fill {
+    animation: dotProgress 5500ms linear forwards;
+}
+.reviews-dot.is-active.is-paused .reviews-dot-fill {
+    animation-play-state: paused;
+}
+
+ /* Рамки карток */
+.card-border-cyan {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    border: 1px solid transparent;
+    background: linear-gradient(145deg, rgba(34, 211, 238, 0.35) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(34, 211, 238, 0.1) 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    transition: background 0.4s ease;
+}
+
+.card-border-violet {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    border: 1px solid transparent;
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.4) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(139, 92, 246, 0.12) 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    transition: background 0.4s ease;
+}
+
+/* Акцентна картка (3 Місяці - Хіт) */
+.hit-card {
+    background: linear-gradient(165deg, rgba(26, 24, 68, 0.82) 0%, rgba(9, 11, 30, 0.94) 100%);
+    box-shadow: 0 0 50px -8px rgba(34, 211, 238, 0.28), 0 0 55px -10px rgba(139, 92, 246, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    position: relative;
+}
+
+.hit-border {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 50%, #10b981 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+}
+
+/* VIP Картка (Перманентний доступ) */
+.vip-card {
+    background: linear-gradient(165deg, rgba(34, 24, 54, 0.6) 0%, rgba(10, 9, 22, 0.85) 100%);
+}
+
+.vip-border {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.45) 0%, rgba(139, 92, 246, 0.4) 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+}
+
+.module-card {
+    background: linear-gradient(165deg, rgba(18, 22, 48, 0.55) 0%, rgba(7, 9, 22, 0.8) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.6), 0 14px 32px -10px rgba(0, 0, 0, 0.85);
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* ========================================================================= */
+/* СТИЛІ ДЛЯ ВИТОНЧЕНОГО ПРЕМІУМ-БЕЙДЖА «НАЙПОПУЛЯРНІШЕ»                     */
+/* ========================================================================= */
+.premium-badge {
+    background: linear-gradient(180deg, rgba(20, 26, 56, 0.96) 0%, rgba(9, 12, 28, 0.98) 100%);
+    box-shadow: 
+        0 8px 20px -4px rgba(0, 0, 0, 0.75),
+        0 0 18px -3px rgba(34, 211, 238, 0.22),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+        inset 0 -4px 8px 0 rgba(139, 92, 246, 0.12);
+}
+
+/* Тонка ювелірна градієнтна рамка бейджа в тон картки */
+.premium-badge-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.75) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(139, 92, 246, 0.75) 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* Делікатний світловий блік, що раз на кілька секунд м'яко проходить по склу */
+@keyframes subtleSheen {
+    0%, 70% { transform: translateX(-120%) skewX(-20deg); opacity: 0; }
+    80% { opacity: 1; }
+    100% { transform: translateX(220%) skewX(-20deg); opacity: 0; }
+}
+.badge-sheen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    animation: subtleSheen 6.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Глазморфізм бейджа Telegram у Final CTA */
+.badge-glass {
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .animate-pulseGlow, .animate-scanline, .animate-signalPop, .animate-aurora, .animate-fadeInUp, .animate-scroll-left { 
+        animation: none !important; 
+    }
+    .animate-fadeInUp { opacity: 1 !important; transform: none !important; }
+    .term-caret::after { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .proof-benefit-card { transition-duration: 1ms; }
+}
