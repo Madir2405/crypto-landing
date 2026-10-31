@@ -12,6 +12,7 @@ tailwind.config = {
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
+                        'float_badge': 'float_badge 4s ease-in-out infinite',
                         pulseGlow: 'pulseGlow 2.4s ease-in-out infinite',
                         signalPop: 'pop .5s cubic-bezier(.16,1,.3,1)',
                         scanline: 'scan 1.5s linear infinite',
@@ -22,6 +23,10 @@ tailwind.config = {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
+                        },
+                        float_badge: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
                         },
                         pulseGlow: { '0%,100%': { opacity: '.5' }, '50%': { opacity: '1' } },
                         pop: { '0%': { transform: 'scale(.96)', opacity: '0' }, '60%': { transform: 'scale(1.02)' }, '100%': { transform: 'scale(1)', opacity: '1' } },
